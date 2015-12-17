@@ -1,8 +1,10 @@
 /**
  * Created by nico on 14.12.15.
  */
-var express = require('express');
-var reviewParser = require('./review-parser.js');
+var express = require('express'),
+    reviewParser = require('./review-parser.js'),
+    server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080,
+    server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 var app = express();
 
@@ -19,7 +21,7 @@ app.get('/', function (req, res){
     });
 });
 
-app.listen(8080);
+app.listen(server_port);
 
 
 
