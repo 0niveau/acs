@@ -8,6 +8,7 @@ var jsdom = require('jsdom'),
     pagination_selector = '.a-pagination',
     next_button_selector = '.a-last',
     button_disabled_class = 'a-disabled',
+    total_review_count_selector = '.totalReviewCount',
     review_list_selector = '#cm_cr-review_list',
     review_selector = '.review',
     review_votes_selector = '.review-votes',
@@ -67,15 +68,16 @@ function retrieveReviews(arrayOfReviews, callback) {
         url: urlObject.getFullURL(),
         scripts: ["http://code.jquery.com/jquery.js"],
         done: function (err, window) {
-            var $ = window.$;
-
+            var $ = window.$,
+                availableReviews = parseInt($(total_review_count_selector).text());
+            console.log(availableReviews,"reviews found!");
             console.log("Processing reviews of page: ", urlObject.pageNumber);
 
             $(review_selector).each(function() {
                 arrayOfReviews.push(getReview($(this)));
             });
 
-            if (hasMoreReviews($(review_list_selector))) {
+            if (arrayOfReviews.length < availableReviews) {
                 console.log("retrieving next page ...");
                 urlObject.alterPageNumber();
                 retrieveReviews(arrayOfReviews, callback);
@@ -85,17 +87,6 @@ function retrieveReviews(arrayOfReviews, callback) {
             }
         }
     });
-}
-
-/*
- * Checks if there are additional pages of reviews
- */
-function hasMoreReviews(reviewList) {
-    var nextButton = reviewList.find(pagination_selector).find(next_button_selector);
-    if (nextButton.hasClass(button_disabled_class)) {
-        return false;
-    }
-    return true;
 }
 
 /*
