@@ -1,0 +1,17 @@
+{
+  "name": "amazon-customer-reviews",
+  "version": "0.0.1",
+  "description": "retrieves amazon customer reviews for a given product id",
+  "main": "review-parser.js",
+  "dependencies": {
+    "jsdom": "^7.2.1",
+    "promise": "^7.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nico Becker",
+  "repository": "https://github.com/0niveau/acs.git",
+  "license": "GPL-3.0"
+}
