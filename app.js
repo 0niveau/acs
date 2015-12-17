@@ -7,6 +7,7 @@ var express = require('express'),
     server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 var app = express();
+app.set('ipaddress', server_ip_address);
 
 app.get('/', function (req, res){
     console.log(req.query.productId);
