@@ -64,7 +64,7 @@ function retrieveReviews(arrayOfReviews, callback) {
     request(urlObject.getFullURL(), function(error, response, body){
         if(!error && response.statusCode == 200) {
             var $ = cheerio.load(body),
-                availableReviews = parseInt($(total_review_count_selector).text());
+                availableReviews = parseInt($(total_review_count_selector).text().replace('.',''));
             console.log("cheerio has found", availableReviews, "reviews");
             console.log("Processing reviews of page: ", urlObject.pageNumber);
 
@@ -78,6 +78,7 @@ function retrieveReviews(arrayOfReviews, callback) {
                 retrieveReviews(arrayOfReviews, callback);
             } else {
                 console.log("All reviews retrieved");
+                console.log(arrayOfReviews);
                 callback(arrayOfReviews);
             }
         }

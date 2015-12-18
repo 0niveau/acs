@@ -1,6 +1,6 @@
 {
   "name": "amazon-customer-reviews",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "retrieves amazon customer reviews for a given product id",
   "main": "review-parser.js",
   "dependencies": {
