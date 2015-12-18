@@ -1,12 +1,14 @@
 {
   "name": "amazon-customer-reviews",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "retrieves amazon customer reviews for a given product id",
-  "main": "review-parser.js",
+  "main": "app.js",
   "dependencies": {
+    "cheerio": "^0.19.0",
     "express": "^4.13.3",
     "jsdom": "^7.2.1",
-    "promise": "^7.0.4"
+    "promise": "^7.0.4",
+    "request": "^2.67.0"
   },
   "devDependencies": {},
   "scripts": {

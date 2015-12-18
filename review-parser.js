@@ -2,14 +2,11 @@
  * Created by nico on 14.12.15.
  */
 
-var jsdom = require('jsdom'),
-    Promise = require('promise'),
+var Promise = require('promise'),
+    request = require('request'),
+    cheerio = require('cheerio'),
 
-    pagination_selector = '.a-pagination',
-    next_button_selector = '.a-last',
-    button_disabled_class = 'a-disabled',
     total_review_count_selector = '.totalReviewCount',
-    review_list_selector = '#cm_cr-review_list',
     review_selector = '.review',
     review_votes_selector = '.review-votes',
     review_rating_selector = '.review-rating',
@@ -64,13 +61,11 @@ var urlObject = {
  * This function recursively collects all available reviews for the current configuration of the urlObject
  */
 function retrieveReviews(arrayOfReviews, callback) {
-    jsdom.env({
-        url: urlObject.getFullURL(),
-        scripts: ["http://code.jquery.com/jquery.js"],
-        done: function (err, window) {
-            var $ = window.$,
+    request(urlObject.getFullURL(), function(error, response, body){
+        if(!error && response.statusCode == 200) {
+            var $ = cheerio.load(body),
                 availableReviews = parseInt($(total_review_count_selector).text());
-            console.log(availableReviews,"reviews found!");
+            console.log("cheerio has found", availableReviews, "reviews");
             console.log("Processing reviews of page: ", urlObject.pageNumber);
 
             $(review_selector).each(function() {
