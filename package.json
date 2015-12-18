@@ -2,7 +2,7 @@
   "name": "amazon-customer-reviews",
   "version": "0.0.1",
   "description": "retrieves amazon customer reviews for a given product id",
-  "main": "app.js",
+  "main": "review-parser.js",
   "dependencies": {
     "express": "^4.13.3",
     "jsdom": "^7.2.1",
